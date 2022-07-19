@@ -3,37 +3,38 @@ package sef.compassion.testcases;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import sef.compassion.utilities.Utilities;
 
-public class new_user extends BaseClass
-
+public class new_user_compassion extends BaseClass
 {
 	By globalpool 		= By.xpath("//div[2]/div[2]/div[2]/input[@name='child-pool']");
 	By search_button 	= By.id("global-search");
-	By hold_import		= By.xpath("//div[3]/div[1]/div[1]/div[@class='col-lg-12']");
+	By hold_import		= By.xpath("//div[@id='children-container']/div[1]/div[1]/div[@class='col-lg-12']");
 	By appl_code 		= By.xpath("//div[1]/div[1]/div[3]/div[1]/input[@id='barcode']");
 	By sponsor_source	= By.xpath("//div[4]/div[1]/div[@class='ui dropdown selection']");
 	By supporter_type	= By.xpath("//div[3]/div[2]/div[1]/div[@class='ui dropdown selection']");
 	By RNID				= By.xpath("//input[@id='sprnid0']");
 	By search_supprter	= By.xpath("//div[2]/button[@id='fetchsup0']");
 	By title			= By.xpath("//div[3]/div[1]//div[@class='ui dropdown selection title']");
-	By firstname		= By.xpath("//div[3]/div[2]/div[1]/div[3]/div[2]/div[1]//input[@type='text']");
+	By firstname		= By.xpath("//div[3]/div[@id='myDetails']/div[1]/div[3]/div[2]/div[1]/input[@type='text']");
 	By lastname			= By.xpath("//div[3]/div[3]/div[1]//input[@id='surname0']");
 	By email			= By.xpath("//div[8]/div[1]/div[1]//input[@id='emailid0']");
 	By supporter_group  = By.xpath("//body/div[2]/div[2]/div[1]/div[1]/form[1]/div[5]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]");
-	By DDI_source 		= By.xpath("//div[7]/div[2]/div[2]/div[2]/div[1]//div[@class='ui dropdown selection']");
+	By DDI_source 		= By.xpath("//div[2]/div[2]/div[2]/div[1]/div[@class='ui dropdown selection']");
 	By acc_name			= By.xpath("//div[7]/div[2]/div[3]/div[1]/div[1]/input[@id='accountname']");
 	By acc_no			= By.xpath("//div[7]/div[2]/div[3]/div[2]/div[1]/input[@id='accountnumber']");
 	By sort_code 		= By.xpath("//div[7]/div[2]/div[3]/div[3]/div[1]/input[@id='sortcode']");
+	By calendar_click	= By.id("ffdate");
+	By calendar_header	= By.xpath("//div[@id='ui-datepicker-div']/div[1]/div[1]");
+	By next_calendar	= By.xpath("//span[contains(text(),'Next')]");
 	By validate_acc		= By.xpath("//div[5]/div[1]/button[@id='validateBankAccount']");
 	By validate_msg		= By.xpath("//label[contains(text(),'Bank Account Validated Successfully.')]");
 	By submit			= By.xpath("//div[10]/div[1]/div[1]/div[1]/div[2]/input[@id='submit']");
-	By continue_response= By.xpath("//div[contains(text(),'Continue')]");
 	
 	@Test
 	public void test() throws InterruptedException
@@ -170,63 +171,55 @@ public class new_user extends BaseClass
 	 	 }
 		
 		
-	
+		
+		
 		String month ="August 2022";
-				
-		driver.findElement(By.xpath("//input[@id='ffdate']")).click();																//open calendar
-		Utilities.hardWait(5);
-				
+		
+		driver.findElement(calendar_click).click();												//click calendar
+		
+		Thread.sleep(3000);
+		
 		while(true)
 		{
-					
-		String msg = driver.findElement(By.xpath("//div[@id='ui-datepicker-div']/div[1]/div[1]")).getText();						//take date and year from calendar's header
-		if(msg.equals(month))
-		{
-//			String date = driver.findElement(By.xpath("//div[@id='ui-datepicker-div']/div[1]/div[1]")).getText();
-//			System.out.println("Wrong date selected	:	"+date);
-			break;
+			String msg = driver.findElement(calendar_header).getText();							//get calendar's header text
+
+			if(msg.equals(month))
+			{
+				break;
+			}
+			else
+			{
+				driver.findElement(next_calendar).click();										//click next calendar
+				Utilities.hardWait(1);
+			}
 		}
-		else
-		{
-			driver.findElement(By.xpath("//span[contains(text(),'Next')]")).click();												//next calendar click
-			Thread.sleep(2000);			
-		}
-		}
-		driver.findElement(By.xpath("//tbody/tr[1]/td[2]/a[1]")).click();															//day "1" select
-		String day = driver.findElement(By.xpath("//tbody/tr[1]/td[2]/a[1]")).getText();											//get day "1" text
-		String msg = driver.findElement(By.xpath("//div[@id='ui-datepicker-div']/div[1]/div[1]")).getText();						//get month and year text
-		Thread.sleep(1000);
-		System.out.println("Date selected : "+day+" "+msg);
-				
+		driver.findElement(By.xpath("//tbody/tr[1]/td[2]/a[1]")).click();												//day "1" select
+		Utilities.hardWait(1);
+		String day = driver.findElement(By.xpath("//tbody/tr[1]/td[2]/a[1]")).getText();								//"1" date capture
+		String msg = driver.findElement(By.xpath("//div[@id='ui-datepicker-div']/div[1]/div[1]")).getText();			//month and year capture and print in output
+		System.out.println("Date selected:"+day+" "+msg);
 		
 		driver.findElement(submit).click();
-		Utilities.hardWait(50);
+	
+		String parent2=driver.getWindowHandle();
 		
-		String parent=driver.getWindowHandle();
-		
-		Set<String>s=driver.getWindowHandles();
+		Set<String>s2=driver.getWindowHandles();
 
-		Iterator<String> I= s.iterator();
+		Iterator<String> I2= s2.iterator();
 
-		while(I.hasNext())
+		while(I2.hasNext())
 		{
-		String child_window=I.next();
-		if(!parent.equals(child_window))
+		String child_window2=I2.next();
+		if(!parent2.equals(child_window2))
 			{
-				driver.switchTo().window(child_window);
+				driver.switchTo().window(child_window2);
 				String response_msg = driver.findElement(By.className(" head2 wait")).getText();
 				System.out.println(response_msg);
-				Utilities.hardWait(2);		
-				
-				driver.findElement(continue_response).click();
+				Utilities.hardWait(2);					
 			}
-		
-		System.out.println(" ***** COMPLETED *****");
-	}	
+		}
+	
 	}
-}
-	
-		
-	
+	}
 
 

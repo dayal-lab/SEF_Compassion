@@ -2,7 +2,10 @@ package sef.compassion.testcases;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -15,10 +18,16 @@ import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import sef.compassion.utilities.Utilities;
 
-public class calendar extends BaseClass
+public class calendar
 {
+	By username = By.id("username");
+	By password = By.id("password");
+	By login	= By.id("login");
 	By globalpool 		= By.xpath("//div[2]/div[2]/div[2]/input[@name='child-pool']");
 	By supporter_type	= By.xpath("//div[3]/div[2]/div[1]/div[@class='ui dropdown selection']");
+	
+	WebDriver driver;
+	WebDriverWait wait;
 	
 	@BeforeTest
 	public void setup()
@@ -34,6 +43,12 @@ public class calendar extends BaseClass
 	@Test
 	public void test() throws InterruptedException
 	{
+		
+		driver.findElement(username).sendKeys("GC_2");					
+		driver.findElement(password).sendKeys("G33con0404");			
+		driver.findElement(login).click();								
+		Thread.sleep(5000);
+		
 		driver.findElement(globalpool).click();
 		Thread.sleep(1000);
 		
@@ -73,19 +88,21 @@ public class calendar extends BaseClass
 			else
 			{
 				driver.findElement(By.xpath("//span[contains(text(),'Next')]")).click();
+				Thread.sleep(2000);			
 			}
 		}
 		driver.findElement(By.xpath("//tbody/tr[1]/td[2]/a[1]")).click();
 		String day = driver.findElement(By.xpath("//tbody/tr[1]/td[2]/a[1]")).getText();
 		String msg = driver.findElement(By.xpath("//div[@id='ui-datepicker-div']/div[1]/div[1]")).getText();
-		System.out.println("Date selected	:	"+day+" "+msg);
+		Thread.sleep(1000);
+		System.out.println("Date selected : "+day+" "+msg);
 	}	
 		
 	//after @Test, it runs
 	@AfterMethod
 	public void end()
 	{
-		System.out.println(+'\n'+"***** CALENDAR SELECTION FINISHED *****"+'\n');
+		System.out.println('\n'+"***** CALENDAR SELECTION FINISHED *****"+'\n');
 	}
 		
 	@AfterTest
