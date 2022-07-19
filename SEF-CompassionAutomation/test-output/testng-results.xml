@@ -11,12 +11,12 @@
       <![CDATA[************************ Browser Session End ************************]]>
     </line>
   </reporter-output>
-  <suite started-at="2022-07-19T08:56:46 IST" name="Default suite" finished-at="2022-07-19T08:58:51 IST" duration-ms="124284">
+  <suite started-at="2022-07-19T15:52:39 IST" name="Default suite" finished-at="2022-07-19T15:55:02 IST" duration-ms="142860">
     <groups>
     </groups>
-    <test started-at="2022-07-19T08:56:46 IST" name="Default test" finished-at="2022-07-19T08:58:51 IST" duration-ms="124284">
-      <class name="sef.compassion.testcases.new_user">
-        <test-method is-config="true" signature="setupApplication(java.lang.String, java.lang.String)[pri:0, instance:sef.compassion.testcases.new_user@2f7298b]" started-at="2022-07-19T08:56:46 IST" name="setupApplication" finished-at="2022-07-19T08:57:05 IST" duration-ms="18622" status="PASS">
+    <test started-at="2022-07-19T15:52:39 IST" name="Default test" finished-at="2022-07-19T15:55:02 IST" duration-ms="142860">
+      <class name="sef.compassion.testcases.new_user_sef">
+        <test-method is-config="true" signature="setupApplication(java.lang.String, java.lang.String)[pri:0, instance:sef.compassion.testcases.new_user_sef@2f7298b]" started-at="2022-07-19T15:52:39 IST" name="setupApplication" finished-at="2022-07-19T15:53:02 IST" duration-ms="22399" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -38,18 +38,18 @@
             </line>
           </reporter-output>
         </test-method> <!-- setupApplication -->
-        <test-method signature="test()[pri:0, instance:sef.compassion.testcases.new_user@2f7298b]" started-at="2022-07-19T08:57:05 IST" name="test" finished-at="2022-07-19T08:58:45 IST" duration-ms="99728" status="PASS">
+        <test-method signature="test()[pri:0, instance:sef.compassion.testcases.new_user_sef@2f7298b]" started-at="2022-07-19T15:53:02 IST" name="test" finished-at="2022-07-19T15:54:52 IST" duration-ms="109692" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- test -->
-        <test-method is-config="true" signature="closeApplication()[pri:0, instance:sef.compassion.testcases.new_user@2f7298b]" started-at="2022-07-19T08:58:45 IST" name="closeApplication" finished-at="2022-07-19T08:58:51 IST" duration-ms="5869" status="PASS">
+        <test-method is-config="true" signature="closeApplication()[pri:0, instance:sef.compassion.testcases.new_user_sef@2f7298b]" started-at="2022-07-19T15:54:52 IST" name="closeApplication" finished-at="2022-07-19T15:55:02 IST" duration-ms="10697" status="PASS">
           <reporter-output>
             <line>
               <![CDATA[************************ Browser Session End ************************]]>
             </line>
           </reporter-output>
         </test-method> <!-- closeApplication -->
-      </class> <!-- sef.compassion.testcases.new_user -->
+      </class> <!-- sef.compassion.testcases.new_user_sef -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

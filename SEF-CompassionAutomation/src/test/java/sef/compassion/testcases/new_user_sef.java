@@ -3,13 +3,11 @@ package sef.compassion.testcases;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import sef.compassion.utilities.Utilities;
 
-public class new_user extends BaseClass
-
+public class new_user_sef extends BaseClass
 {
 	By globalpool 		= By.xpath("//div[2]/div[2]/div[2]/input[@name='child-pool']");
 	By search_button 	= By.id("global-search");
@@ -23,7 +21,7 @@ public class new_user extends BaseClass
 	By firstname		= By.xpath("//div[3]/div[2]/div[1]/div[3]/div[2]/div[1]//input[@type='text']");
 	By lastname			= By.xpath("//div[3]/div[3]/div[1]//input[@id='surname0']");
 	By email			= By.xpath("//div[8]/div[1]/div[1]//input[@id='emailid0']");
-//	By supporter_group  = By.xpath("//body/div[2]/div[2]/div[1]/div[1]/form[1]/div[5]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]");
+	By supporter_group  = By.xpath("//div[5]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]");
 	By DDI_source 		= By.xpath("//div[7]/div[2]/div[2]/div[2]/div[1]//div[@class='ui dropdown selection']");
 	By acc_name			= By.xpath("//div[7]/div[2]/div[3]/div[1]/div[1]/input[@id='accountname']");
 	By acc_no			= By.xpath("//div[7]/div[2]/div[3]/div[2]/div[1]/input[@id='accountnumber']");
@@ -128,21 +126,17 @@ public class new_user extends BaseClass
 		Thread.sleep(1000);
 		driver.findElement(email).sendKeys("peterjenkins123@gmail.com");
 		Thread.sleep(2000);
-
-		Select support_group = new Select (driver.findElement(By.id("sup_preferred_name")));
-		support_group.selectByVisibleText("Mr Peter");
-		Utilities.hardWait(2);
-			
-/*		
+					
 		driver.findElement(supporter_group).click();
 		Thread.sleep(1000);
 		List<WebElement> list3 = driver.findElements(By.xpath("//div[@class='menu transition visible']//div"));
 		System.out.println(list3.size());
-		list3.get(1).click();
-		String value3 = list3.get(1).getText();
+		list3.get(0).click();
+		String value3 = list3.get(0).getText();
 		System.out.println(value3);
 		Thread.sleep(2000);
-*/		
+
+		
 		driver.findElement(DDI_source).click();
 		Thread.sleep(1000);
 		List<WebElement> list4 = driver.findElements(By.xpath("//div[@class='menu transition visible']//div"));
@@ -198,13 +192,18 @@ public class new_user extends BaseClass
 		String msg = driver.findElement(By.xpath("//div[@id='ui-datepicker-div']/div[1]/div[1]")).getText();						//get month and year text
 		Thread.sleep(1000);
 		System.out.println("Date selected : "+day+" "+msg);
-					
-		System.out.println('\n'+"***** COMPLETED *****"+'\n');
-	}	
-	}
-
-	
+				
 		
-	
-
-
+		driver.findElement(submit).click();
+		Utilities.hardWait(50);
+		
+		String response_msg = driver.findElement(By.id("Responsetable")).getText();
+		System.out.println(response_msg);
+		Utilities.hardWait(2);
+		
+		driver.findElement(continue_response).click();
+			
+		
+		System.out.println(" ***** COMPLETED *****");
+	}	
+}
